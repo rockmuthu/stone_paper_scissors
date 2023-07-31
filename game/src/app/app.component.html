@@ -1,0 +1,28 @@
+<div class="">
+
+    <h2 class="title pt-3">Rock Paper Scissor</h2><br>
+
+    <div style="float: right;">
+        <p-toast></p-toast>
+        <p-menu #menu [model]="items" [popup]="true"></p-menu>
+        <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" label="Menu"></button>
+    </div>
+
+</div>
+
+
+
+<p-dialog header="Play Game" [(visible)]="visible" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false"
+    [style]="{ width: '20vw' }">
+    <div class="flex py-2 justify-content-center" style="text-align: center;">
+        <input pInputText placeholder="Username" /> <br><br>
+
+        <p-button label="Play Now" styleClass="p-button-rounded p-button-info"></p-button>
+    </div>
+
+</p-dialog>
+
+
+
+
+<router-outlet></router-outlet>

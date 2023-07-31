@@ -1,0 +1,99 @@
+<div class="container">
+
+
+    <!-- Scores -->
+    <div class="d-flex" style="justify-content: space-around;">
+        <div class="scores pt-3">
+            <p><span class="board">Computer</span>:
+                <span id="computer_score">{{compScore}}</span>
+            </p>
+            <p>
+                <span class="board">Player</span>:
+                <span id="user_score">{{userScore}}</span>
+            </p>
+        </div>
+        <div class="knob pt-0">
+            <p-knob [(ngModel)]="round" [min]="0" [max]="6" [strokeWidth]="5" [readonly]="true"></p-knob>
+        </div>
+    </div>
+
+    <div *ngIf="user">
+        <!-- Game -->
+        <div id="game">
+            <div>
+                <h2>Player</h2>
+                <div *ngIf="!status">
+                    <p id="userBefore">
+                        <p-button label="..." styleClass="p-button-rounded p-button-info"></p-button>
+                    </p>
+                </div>
+                <div *ngIf="status" class="d-flex">
+
+                    <p id="player"><p-button label="{{userSelected}}"
+                            styleClass="p-button-rounded p-button-info"></p-button></p>
+                </div>
+            </div>
+
+            <div>
+                Vs
+                <div class="pt-3">
+                    <p-button *ngIf="status == 'Match Draw'" label="{{status}}"
+                        styleClass="p-button-info p-button-text"></p-button>
+                </div>
+            </div>
+
+            <div>
+                <h2>Robot</h2>
+                <div *ngIf="!status">
+                    <p id="computerBefore">
+                        <p-button label="..." styleClass="p-button-rounded p-button-info"></p-button>
+                    </p>
+                </div>
+                <div *ngIf="status" class="d-flex">
+                    <p id="computer"><p-button label="{{compSelected}}"
+                            styleClass="p-button-rounded p-button-info"></p-button></p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-5">
+            <p-button *ngIf="status == 'You win!'" label="{{status}}" class="abc"
+                styleClass="p-button-success p-button-text"></p-button>
+            <p-button *ngIf="status == 'Computer win!'" label="{{status}}" class="xyz"
+                styleClass="p-button-danger p-button-text"></p-button>
+        </div>
+
+        <div *ngIf="!result">
+            <p id="action-message" *ngIf="!status">Pick One...</p>
+            <p id="action-message" *ngIf="status">Wait...</p>
+        </div>
+
+        <!-- Select -->
+        <div class="weapons" *ngIf="!result">
+            <button (click)="pick('Rock')">
+                <i class="far fa-hand-rock"></i>
+            </button>
+            <button (click)="pick('Paper')">
+                <i class="far fa-hand-paper"></i>
+            </button>
+            <button (click)="pick('Scissor')">
+                <i class="far fa-hand-scissors"></i>
+            </button>
+        </div>
+
+        <!-- Display -->
+        <div class="details" *ngIf="result">
+            <p id="result">{{result}}</p>
+            <p-button label="Restart" styleClass="p-button-rounded p-button-info" (onClick)="reload()"></p-button>
+        </div>
+    </div>
+
+
+
+    <div class="flex py-2 justify-content-center" style="text-align: center;" *ngIf="!user">
+        <input type="text" placeholder="Username" [(ngModel)]="userName" /> <br><br>
+        <button (click)="saveUser()" class="btn btn-primary">Play Now</button>
+    </div>
+
+</div>
